@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "dev.xkmc.l2screentracker.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "l2tabs.refmap.json",
+  "mixins": [
+    "NetworkHooksMixin",
+    "ServerPlayerMixin"
+  ],
+  "client": [
+    "AbstractContainerScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

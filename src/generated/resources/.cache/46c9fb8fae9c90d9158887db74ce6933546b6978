@@ -1,0 +1,5 @@
+// 1.19.4	2023-06-02T13:29:10.987326	Registrate Provider for l2screentracker [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+dbc62ee3211c3e32067c30a001a75afdfcddb44e assets/l2screentracker/lang/en_ud.json
+5d3124a69e547c2cb3efb0aef888594c542e780f assets/l2screentracker/lang/en_us.json
+ca321e36001a2590fc62d485e040d4ba224df130 data/l2screentracker/tags/items/quick_access.json
+042d6b3c62ca82ee52acdf3609d2ea34a98fe76d data/l2screentracker/tags/items/quick_access_vanilla.json
