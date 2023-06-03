@@ -8,6 +8,11 @@ import net.minecraftforge.fml.ModList;
 
 public class L2CuriosCompat {
 
+	public static void onStartup() {
+		if (ModList.get().isLoaded("curios")) {
+			CuriosTrackCompatImpl.get().onStartUp();
+		}
+	}
 	public static void openCuriosInv(ServerPlayer player) {
 		if (ModList.get().isLoaded("curios")) {
 			CuriosTrackCompatImpl.get().openCurioImpl(player);

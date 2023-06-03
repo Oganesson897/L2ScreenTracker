@@ -33,7 +33,7 @@ public final class TrackedEntry<T extends Record & TrackedEntryData<T>> {
 	}
 
 	public LayerPopType restoreServerMenu(ServerPlayer player) {
-		Component comp = Component.Serializer.fromJson(title);
+		Component comp = title == null ? null : Component.Serializer.fromJson(title);
 		return type.restoreMenuNotifyClient(player, data, comp);
 	}
 

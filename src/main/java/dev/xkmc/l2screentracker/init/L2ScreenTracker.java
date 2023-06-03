@@ -17,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
@@ -26,7 +28,7 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 public class L2ScreenTracker {
 
 	public static final String MODID = "l2screentracker";
-
+	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	public static final PacketHandler PACKET_HANDLER = new PacketHandler(new ResourceLocation(MODID, "main"), 1,
@@ -41,6 +43,7 @@ public class L2ScreenTracker {
 		L2ScreenTrackerConfig.init();
 		ScreenTracker.register();
 		ScreenTrackerRegistry.register();
+		L2CuriosCompat.onStartup();
 		QuickAccessClickHandler.INS = new QuickAccessClickHandler(new ResourceLocation(MODID, "quick_access"));
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, L2STTagGen::genItemTags);
 		REGISTRATE.addDataGenerator(ProviderType.LANG, L2STLangData::genLang);

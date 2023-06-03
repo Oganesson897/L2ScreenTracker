@@ -87,8 +87,8 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		}
 		var getter = MenuTraceRegistry.get(prev.getType());
 		if (getter != null) {
-			var entry = getter.track(Wrappers.cast(prev));
-			if (entry.isPresent()) {
+			var entry = Wrappers.get(() -> getter.track(Wrappers.cast(prev)));
+			if (entry != null && entry.isPresent()) {
 				return entry.get();
 
 			}
@@ -125,9 +125,9 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		if (stack.isEmpty()) return false;
 		if (this.wid == wid) {
 			restoring = true;
-			LayerPopType type = stack.pop().restoreServerMenu(player);
+			LayerPopType type = Wrappers.get(() -> stack.pop().restoreServerMenu(player));
 			restoring = false;
-			if (type != LayerPopType.FAIL) {
+			if (type != null && type != LayerPopType.FAIL) {
 				int id = player.containerMenu.containerId;
 				this.wid = id;
 				L2ScreenTracker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);
