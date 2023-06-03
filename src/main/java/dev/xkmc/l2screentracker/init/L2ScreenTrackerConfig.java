@@ -1,6 +1,5 @@
 package dev.xkmc.l2screentracker.init;
 
-import dev.xkmc.l2library.init.L2LibraryConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.IConfigSpec;
