@@ -12,7 +12,7 @@ public record DummyHandler(Player player) implements ContainerLevelAccess {
 
 	@Override
 	public <T> Optional<T> evaluate(BiFunction<Level, BlockPos, T> func) {
-		func.apply(player.getLevel(), player.getOnPos());
+		func.apply(player.level(), player.getOnPos());
 		return Optional.empty();
 	}
 

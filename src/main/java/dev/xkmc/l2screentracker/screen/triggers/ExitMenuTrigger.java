@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2screentracker.init.L2ScreenTracker;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -17,7 +17,7 @@ public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenu
 	}
 
 	public static Ins exitOne() {
-		return new Ins(EXIT_MENU.getId(), EntityPredicate.Composite.ANY);
+		return new Ins(EXIT_MENU.getId(), ContextAwarePredicate.ANY);
 	}
 
 	public static Ins exitAll() {
@@ -40,7 +40,7 @@ public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenu
 		@SerialClass.SerialField
 		private boolean all = false;
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 
