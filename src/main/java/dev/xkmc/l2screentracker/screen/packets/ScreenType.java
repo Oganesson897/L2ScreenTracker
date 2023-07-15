@@ -1,21 +1,19 @@
 package dev.xkmc.l2screentracker.screen.packets;
 
-import dev.xkmc.l2library.util.Proxy;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import java.util.function.Supplier;
 
 public enum ScreenType {
-	NONE(() -> Minecraft.getInstance().setScreen(null)),
-	PLAYER(() -> Minecraft.getInstance().setScreen(new InventoryScreen(Proxy.getClientPlayer())));
+	NONE(() -> ScreenTypeClient::none),
+	PLAYER(() -> ScreenTypeClient::player);
 
-	private final Runnable callback;
+	private final Supplier<Runnable> callback;
 
-	ScreenType(Runnable callback) {
+	ScreenType(Supplier<Runnable> callback) {
 		this.callback = callback;
 	}
 
 	public void perform() {
-		callback.run();
+		callback.get().run();
 	}
 
 }

@@ -9,10 +9,7 @@ import dev.xkmc.l2screentracker.click.quickaccess.QuickAccessClickHandler;
 import dev.xkmc.l2screentracker.compat.L2CuriosCompat;
 import dev.xkmc.l2screentracker.screen.base.ScreenTracker;
 import dev.xkmc.l2screentracker.screen.base.ScreenTrackerRegistry;
-import dev.xkmc.l2screentracker.screen.packets.AddTrackedToClient;
-import dev.xkmc.l2screentracker.screen.packets.PopLayerToClient;
-import dev.xkmc.l2screentracker.screen.packets.RestoreMenuToServer;
-import dev.xkmc.l2screentracker.screen.packets.SetScreenToClient;
+import dev.xkmc.l2screentracker.screen.packets.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +37,7 @@ public class L2ScreenTracker {
 	);
 
 	public L2ScreenTracker() {
+		new SetScreenToClient(ScreenType.PLAYER);//TODO
 		L2ScreenTrackerConfig.init();
 		ScreenTracker.register();
 		ScreenTrackerRegistry.register();
