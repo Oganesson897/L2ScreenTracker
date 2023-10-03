@@ -37,7 +37,6 @@ public class L2ScreenTracker {
 	);
 
 	public L2ScreenTracker() {
-		new SetScreenToClient(ScreenType.PLAYER);//TODO
 		L2ScreenTrackerConfig.init();
 		ScreenTracker.register();
 		ScreenTrackerRegistry.register();

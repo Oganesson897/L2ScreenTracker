@@ -23,8 +23,9 @@ public abstract class WritableStackClickHandler extends SlotClickHandler {
 		} else {
 			AbstractContainerMenu menu = player.containerMenu;
 			if (wid == 0 || menu.containerId == 0 || wid != menu.containerId) return null;
-			return new ClickedPlayerSlotResult(menu.getSlot(index).getItem(),
-					PlayerSlot.ofOtherInventory(slot, index, wid, menu),
+			PlayerSlot<?> playerSlot = PlayerSlot.ofOtherInventory(slot, index, wid, menu);
+			if (playerSlot == null) return null;
+			return new ClickedPlayerSlotResult(menu.getSlot(index).getItem(), playerSlot,
 					new RealContainerCallback(menu.getSlot(index).container));
 		}
 
