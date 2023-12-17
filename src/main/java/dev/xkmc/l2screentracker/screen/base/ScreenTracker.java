@@ -59,6 +59,10 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		get(player).stack.clear();
 	}
 
+	public static int size(ServerPlayer player) {
+		return get(player).stack.size();
+	}
+
 	// non-static
 
 	final Stack<TrackedEntry<?>> stack = new Stack<>();

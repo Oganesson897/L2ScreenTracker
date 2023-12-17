@@ -29,7 +29,7 @@ public class RestoreMenuToServer extends SerialPacketBase {
 		ServerPlayer player = context.getSender();
 		if (player == null) return;
 		if (wid < 0) {
-			if (wid == ClientCloseResult.POP_ALL.id) {
+			if (wid == ClientCloseResult.POP_ALL.id && ScreenTracker.size(player) >= 2) {
 				ExitMenuTrigger.EXIT_MENU.trigger(player, true);
 			}
 			ScreenTracker.removeAll(player);
@@ -38,8 +38,8 @@ public class RestoreMenuToServer extends SerialPacketBase {
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid || !ScreenTracker.get(player).serverRestore(player, wid)) {
 			L2ScreenTracker.PACKET_HANDLER.toClientPlayer(new SetScreenToClient(ScreenType.NONE), player);
+			ExitMenuTrigger.EXIT_MENU.trigger(player, false);
 		}
-		ExitMenuTrigger.EXIT_MENU.trigger(player, false);
 	}
 
 }
