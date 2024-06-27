@@ -1,9 +1,9 @@
 package dev.xkmc.l2menustacker.click;
 
 import dev.xkmc.l2core.util.Proxy;
-import dev.xkmc.l2menustacker.init.L2STLangData;
-import dev.xkmc.l2menustacker.init.L2STTagGen;
-import dev.xkmc.l2menustacker.init.L2ScreenTracker;
+import dev.xkmc.l2menustacker.init.L2MSLangData;
+import dev.xkmc.l2menustacker.init.L2MSTagGen;
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.lwjgl.glfw.GLFW;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = L2ScreenTracker.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(value = Dist.CLIENT, modid = L2MenuStacker.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class SlotClickEventHandler {
 
 	@SubscribeEvent
@@ -28,7 +28,7 @@ public class SlotClickEventHandler {
 			if (slot.getItem().isStackable()) {
 				ItemStack stack = slot.getItem();
 				if (stack.getCount() > 1) return;
-				if (!stack.is(L2STTagGen.QUICK_ACCESS)) return;
+				if (!stack.is(L2MSTagGen.QUICK_ACCESS)) return;
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				boolean b1 = slot.container == Proxy.getClientPlayer().getInventory();
@@ -53,8 +53,8 @@ public class SlotClickEventHandler {
 
 	@SubscribeEvent
 	public static void tooltipEvent(ItemTooltipEvent event) {
-		if (event.getItemStack().is(L2STTagGen.QUICK_ACCESS_VANILLA))
-			event.getToolTip().add(L2STLangData.QUICK_ACCESS.get().withStyle(ChatFormatting.GRAY));
+		if (event.getItemStack().is(L2MSTagGen.QUICK_ACCESS_VANILLA))
+			event.getToolTip().add(L2MSLangData.QUICK_ACCESS.get().withStyle(ChatFormatting.GRAY));
 	}
 
 

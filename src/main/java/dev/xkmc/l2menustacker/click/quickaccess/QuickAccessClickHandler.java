@@ -1,7 +1,7 @@
 package dev.xkmc.l2menustacker.click.quickaccess;
 
 import dev.xkmc.l2menustacker.click.ReadOnlyStackClickHandler;
-import dev.xkmc.l2menustacker.init.L2STTagGen;
+import dev.xkmc.l2menustacker.init.L2MSTagGen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -26,7 +26,7 @@ public class QuickAccessClickHandler extends ReadOnlyStackClickHandler {
 
 	@Override
 	public boolean isAllowed(ItemStack stack) {
-		return stack.is(L2STTagGen.QUICK_ACCESS_VANILLA);
+		return stack.is(L2MSTagGen.QUICK_ACCESS_VANILLA);
 	}
 
 	@Override

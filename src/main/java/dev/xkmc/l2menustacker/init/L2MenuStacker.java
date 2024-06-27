@@ -2,6 +2,7 @@ package dev.xkmc.l2menustacker.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2core.init.reg.registrate.L2Registrate;
+import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2menustacker.click.SlotClickToServer;
 import dev.xkmc.l2menustacker.click.quickaccess.DefaultQuickAccessActions;
 import dev.xkmc.l2menustacker.click.quickaccess.QuickAccessClickHandler;
@@ -24,12 +25,13 @@ import org.apache.logging.log4j.Logger;
 import static dev.xkmc.l2serial.network.PacketHandler.NetDir.PLAY_TO_CLIENT;
 import static dev.xkmc.l2serial.network.PacketHandler.NetDir.PLAY_TO_SERVER;
 
-@Mod(L2ScreenTracker.MODID)
-@EventBusSubscriber(modid = L2ScreenTracker.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class L2ScreenTracker {
+@Mod(L2MenuStacker.MODID)
+@EventBusSubscriber(modid = L2MenuStacker.MODID, bus = EventBusSubscriber.Bus.MOD)
+public class L2MenuStacker {
 
-	public static final String MODID = "l2screentracker";
+	public static final String MODID = "l2menustacker";
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Reg REG = new Reg(MODID);
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	public static final PacketHandler PACKET_HANDLER = new PacketHandler(MODID, 1,
@@ -40,14 +42,14 @@ public class L2ScreenTracker {
 			e -> e.create(PopLayerToClient.class, PLAY_TO_CLIENT)
 	);
 
-	public L2ScreenTracker() {
-		L2ScreenTrackerConfig.init();
+	public L2MenuStacker() {
+		L2MSConfig.init();
 		ScreenTracker.register();
 		ScreenTrackerRegistry.register();
 		L2CuriosCompat.onStartup();
 		QuickAccessClickHandler.INS = new QuickAccessClickHandler(loc("quick_access"));
-		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, L2STTagGen::genItemTags);
-		REGISTRATE.addDataGenerator(ProviderType.LANG, L2STLangData::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, L2MSTagGen::genItemTags);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, L2MSLangData::genLang);
 	}
 
 	@SubscribeEvent

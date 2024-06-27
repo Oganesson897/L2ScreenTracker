@@ -3,7 +3,7 @@ package dev.xkmc.l2menustacker.compat;
 import dev.xkmc.l2menustacker.compat.track.CurioInvTrace;
 import dev.xkmc.l2menustacker.compat.track.CurioSource;
 import dev.xkmc.l2menustacker.compat.track.CurioTabTrace;
-import dev.xkmc.l2menustacker.init.L2ScreenTracker;
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.base.ScreenTrackerRegistry;
 import dev.xkmc.l2menustacker.screen.source.MenuSourceRegistry;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
@@ -56,9 +56,9 @@ public class CuriosTrackCompatImpl {
 	public Supplier<CurioTabTrace> TE_CURIO_TAB;
 
 	void onStartUp() {
-		IS_CURIOS = L2ScreenTracker.REGISTRATE.simple("curios", ScreenTrackerRegistry.ITEM_SOURCE.key(), CurioSource::new);
-		TE_CURIO_INV = L2ScreenTracker.REGISTRATE.simple("curios_inv", ScreenTrackerRegistry.TRACKED_ENTRY_TYPE.key(), CurioInvTrace::new);
-		TE_CURIO_TAB = L2ScreenTracker.REGISTRATE.simple("curios_tab", ScreenTrackerRegistry.TRACKED_ENTRY_TYPE.key(), CurioTabTrace::new);
+		IS_CURIOS = L2MenuStacker.REGISTRATE.simple("curios", ScreenTrackerRegistry.ITEM_SOURCE.key(), CurioSource::new);
+		TE_CURIO_INV = L2MenuStacker.REGISTRATE.simple("curios_inv", ScreenTrackerRegistry.TRACKED_ENTRY_TYPE.key(), CurioInvTrace::new);
+		TE_CURIO_TAB = L2MenuStacker.REGISTRATE.simple("curios_tab", ScreenTrackerRegistry.TRACKED_ENTRY_TYPE.key(), CurioTabTrace::new);
 	}
 
 	void onCommonSetup() {

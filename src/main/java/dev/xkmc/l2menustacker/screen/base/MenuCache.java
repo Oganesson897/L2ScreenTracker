@@ -1,6 +1,6 @@
 package dev.xkmc.l2menustacker.screen.base;
 
-import dev.xkmc.l2menustacker.init.L2ScreenTrackerConfig;
+import dev.xkmc.l2menustacker.init.L2MSConfig;
 import dev.xkmc.l2menustacker.screen.track.MenuProviderTraceData;
 import dev.xkmc.l2menustacker.screen.track.TrackedEntry;
 import io.netty.buffer.Unpooled;
@@ -24,7 +24,7 @@ public record MenuCache(AbstractContainerMenu menu, MenuProvider pvd, Component 
 			buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), access, ConnectionType.NEOFORGE);
 			writer.accept(buf);
 		}
-		if (L2ScreenTrackerConfig.SERVER.tabSafeMode.get()) {
+		if (L2MSConfig.SERVER.tabSafeMode.get()) {
 			if (buf != null && buf.writerIndex() > 0) {
 				type = MenuTriggerType.DISABLED;
 			} else {

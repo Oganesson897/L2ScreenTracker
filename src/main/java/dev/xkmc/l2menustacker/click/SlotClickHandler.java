@@ -1,6 +1,6 @@
 package dev.xkmc.l2menustacker.click;
 
-import dev.xkmc.l2menustacker.init.L2ScreenTracker;
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ public abstract class SlotClickHandler {
 	}
 
 	protected final void slotClickToServer(int index, int slot, int wid) {
-		L2ScreenTracker.PACKET_HANDLER.toServer(new SlotClickToServer(id, index, slot, wid));
+		L2MenuStacker.PACKET_HANDLER.toServer(new SlotClickToServer(id, index, slot, wid));
 	}
 
 	public abstract boolean isAllowed(ItemStack stack);

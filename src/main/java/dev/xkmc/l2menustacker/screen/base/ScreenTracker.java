@@ -3,7 +3,7 @@ package dev.xkmc.l2menustacker.screen.base;
 import dev.xkmc.l2core.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2core.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2core.capability.player.PlayerCapabilityTemplate;
-import dev.xkmc.l2menustacker.init.L2ScreenTracker;
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.packets.AddTrackedToClient;
 import dev.xkmc.l2menustacker.screen.packets.PopLayerToClient;
 import dev.xkmc.l2menustacker.screen.track.MenuTraceRegistry;
@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 
 	public static final PlayerCapabilityHolder<ScreenTracker> HOLDER = new PlayerCapabilityHolder<>(
-			L2ScreenTracker.loc("screen_tracker"),
+			L2MenuStacker.loc("screen_tracker"),
 			ScreenTracker.class, ScreenTracker::new, PlayerCapabilityNetworkHandler::new);
 
 	public static void register() {
@@ -115,7 +115,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		}
 		stack.push(prev);
 		wid = menu.containerId;
-		L2ScreenTracker.PACKET_HANDLER.toClientPlayer(new AddTrackedToClient(prev, toRemove, wid), player);
+		L2MenuStacker.PACKET_HANDLER.toClientPlayer(new AddTrackedToClient(prev, toRemove, wid), player);
 	}
 
 	public boolean serverRestore(ServerPlayer player, int wid) {
@@ -127,7 +127,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 			if (type != null && type != LayerPopType.FAIL) {
 				int id = player.containerMenu.containerId;
 				this.wid = id;
-				L2ScreenTracker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);
+				L2MenuStacker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);
 				return true;
 			}
 		}

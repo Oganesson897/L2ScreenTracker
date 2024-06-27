@@ -1,7 +1,7 @@
 package dev.xkmc.l2menustacker.screen.base;
 
 import dev.xkmc.l2core.util.Proxy;
-import dev.xkmc.l2menustacker.init.L2ScreenTracker;
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.packets.RestoreMenuToServer;
 import dev.xkmc.l2menustacker.screen.packets.ScreenType;
 import dev.xkmc.l2menustacker.screen.track.TrackedEntry;
@@ -24,11 +24,11 @@ public class ScreenTrackerClient {
 		var result = onClientCloseImpl(tracker, wid);
 		if (result == ClientCloseResult.REMAIN) {
 			tracker.isWaiting = true;
-			L2ScreenTracker.PACKET_HANDLER.toServer(new RestoreMenuToServer(wid));
+			L2MenuStacker.PACKET_HANDLER.toServer(new RestoreMenuToServer(wid));
 			return true;
 		}
 		tracker.stack.clear();
-		L2ScreenTracker.PACKET_HANDLER.toServer(new RestoreMenuToServer(result.id));
+		L2MenuStacker.PACKET_HANDLER.toServer(new RestoreMenuToServer(result.id));
 		return false;
 	}
 

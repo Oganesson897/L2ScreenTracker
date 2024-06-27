@@ -6,7 +6,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class L2ScreenTrackerConfig {
+public class L2MSConfig {
 
 	public static class Client {
 
