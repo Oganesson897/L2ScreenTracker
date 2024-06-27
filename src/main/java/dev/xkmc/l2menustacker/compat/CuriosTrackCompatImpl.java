@@ -18,7 +18,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkHooks;
 import net.neoforged.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
@@ -131,7 +130,7 @@ public class CuriosTrackCompatImpl {
 	}
 
 	void openCurioImpl(ServerPlayer player) {
-		NetworkHooks.openScreen(player, new CuriosContainerProvider());
+		player.openMenu(new CuriosContainerProvider());
 	}
 
 }

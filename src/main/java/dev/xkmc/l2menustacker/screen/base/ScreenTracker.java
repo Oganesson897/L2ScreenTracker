@@ -11,7 +11,7 @@ import dev.xkmc.l2menustacker.screen.track.NoData;
 import dev.xkmc.l2menustacker.screen.track.TrackedEntry;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -44,8 +44,8 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		get(player).serverOpen(player);
 	}
 
-	public static void onServerOpenMenu(ServerPlayer player, MenuProvider next, MenuTriggerType type, @Nullable Consumer<FriendlyByteBuf> buf) {
-		get(player).serverOpenMenu(player, MenuCache.of(player.containerMenu, next, type, buf));
+	public static void onServerOpenMenu(ServerPlayer player, MenuProvider next, MenuTriggerType type, @Nullable Consumer<RegistryFriendlyByteBuf> buf) {
+		get(player).serverOpenMenu(player, MenuCache.of(player.level().registryAccess(), player.containerMenu, next, type, buf));
 	}
 
 	public static void removeAll(ServerPlayer player) {
