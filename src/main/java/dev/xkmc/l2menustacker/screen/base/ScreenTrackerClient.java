@@ -35,7 +35,7 @@ public class ScreenTrackerClient {
 	public static void clientAddLayer(TrackedEntry<?> entry, int toRemove, int wid) {
 		ScreenTracker tracker = getClient();
 		for (int i = 0; i < toRemove; i++) {
-			if (tracker.stack.size() > 0) {
+			if (!tracker.stack.isEmpty()) {
 				tracker.stack.pop();
 			} else break;
 		}

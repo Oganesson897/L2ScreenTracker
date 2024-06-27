@@ -1,9 +1,8 @@
 package dev.xkmc.l2menustacker.screen.source;
 
-import dev.xkmc.l2menustacker.screen.base.ScreenTrackerRegistry;
+import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2serial.serialization.codec.PacketCodec;
 import dev.xkmc.l2serial.util.Wrappers;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -14,7 +13,7 @@ import javax.annotation.Nullable;
 public record PlayerSlot<T extends Record & ItemSourceData<T>>(ItemSource<T> type, T data) {
 
 	public static PlayerSlot<SimpleSlotData> ofInventory(int slot) {
-		return new PlayerSlot<>(ScreenTrackerRegistry.IS_INVENTORY.get(), new SimpleSlotData(slot));
+		return new PlayerSlot<>(L2MSReg.IS_INVENTORY.get(), new SimpleSlotData(slot));
 	}
 
 	@Nullable

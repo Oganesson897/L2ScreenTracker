@@ -36,7 +36,7 @@ public record MenuCache(AbstractContainerMenu menu, MenuProvider pvd, Component 
 	}
 
 	public TrackedEntry<?> constructEntry() {
-		return TrackedEntry.of(ScreenTrackerRegistry.TE_MENU_PROVIDER.get(), new MenuProviderTraceData(this));
+		return TrackedEntry.of(L2MSReg.TE_MENU_PROVIDER.get(), new MenuProviderTraceData(this));
 	}
 
 	public boolean restore(ServerPlayer player) {

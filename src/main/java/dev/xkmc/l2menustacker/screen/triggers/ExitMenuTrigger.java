@@ -1,25 +1,13 @@
 package dev.xkmc.l2menustacker.screen.triggers;
 
-import dev.xkmc.l2core.init.reg.simple.SR;
-import dev.xkmc.l2core.init.reg.simple.Val;
 import dev.xkmc.l2core.serial.advancements.BaseCriterion;
 import dev.xkmc.l2core.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 
 @SerialClass
 public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenuTrigger> {
-
-    public static final SR<CriterionTrigger<?>> REG = SR.of(L2MenuStacker.REG, BuiltInRegistries.TRIGGER_TYPES);
-    public static final Val<ExitMenuTrigger> EXIT_MENU = REG.reg("exit_menu", ExitMenuTrigger::new);
-
-    public static void register() {
-
-    }
 
     public static Ins exitOne() {
         return new Ins();

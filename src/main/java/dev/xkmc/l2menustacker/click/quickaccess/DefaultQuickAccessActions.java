@@ -1,7 +1,7 @@
 package dev.xkmc.l2menustacker.click.quickaccess;
 
 import dev.xkmc.l2menustacker.compat.arclight.*;
-import dev.xkmc.l2menustacker.screen.base.ScreenTrackerRegistry;
+import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2menustacker.screen.track.MenuTraceRegistry;
 import dev.xkmc.l2menustacker.screen.track.QuickAccessTraceData;
 import dev.xkmc.l2menustacker.screen.track.TrackedEntry;
@@ -31,7 +31,7 @@ public class DefaultQuickAccessActions {
 
 	public static <T extends AbstractContainerMenu> void quickAccess(MenuType<T> type, Item item) {
 		MenuTraceRegistry.register(type, menu ->
-				Optional.of(TrackedEntry.of(ScreenTrackerRegistry.TE_QUICK_ACCESS.get(),
+				Optional.of(TrackedEntry.of(L2MSReg.TE_QUICK_ACCESS.get(),
 						new QuickAccessTraceData(item.getDefaultInstance()))));
 	}
 

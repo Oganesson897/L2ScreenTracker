@@ -2,6 +2,7 @@ package dev.xkmc.l2menustacker.screen.packets;
 
 import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.base.ClientCloseResult;
+import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2menustacker.screen.base.ScreenTracker;
 import dev.xkmc.l2menustacker.screen.triggers.ExitMenuTrigger;
 import dev.xkmc.l2serial.network.SerialPacketBase;
@@ -17,7 +18,7 @@ public record RestoreMenuToServer(int wid)
 		if (!(player instanceof ServerPlayer sp)) return;
 		if (wid < 0) {
 			if (wid == ClientCloseResult.POP_ALL.id && ScreenTracker.size(sp) >= 2) {
-				ExitMenuTrigger.EXIT_MENU.get().trigger(sp, true);
+				L2MSReg.EXIT_MENU.get().trigger(sp, true);
 			}
 			ScreenTracker.removeAll(sp);
 			return;
@@ -25,7 +26,7 @@ public record RestoreMenuToServer(int wid)
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid || !ScreenTracker.get(player).serverRestore(sp, wid)) {
 			L2MenuStacker.PACKET_HANDLER.toClientPlayer(new SetScreenToClient(ScreenType.NONE), sp);
-			ExitMenuTrigger.EXIT_MENU.get().trigger(sp, false);
+			L2MSReg.EXIT_MENU.get().trigger(sp, false);
 		}
 	}
 
