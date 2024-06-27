@@ -1,5 +1,7 @@
 package dev.xkmc.l2menustacker.screen.base;
 
+import dev.xkmc.l2menustacker.init.L2MenuStacker;
+import dev.xkmc.l2menustacker.screen.packets.CacheMouseToClient;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;

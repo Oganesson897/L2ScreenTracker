@@ -17,6 +17,10 @@ base {
     archivesName = mod_id
 }
 
+java {
+    withSourcesJar()
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')

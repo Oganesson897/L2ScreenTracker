@@ -1,11 +1,9 @@
 package dev.xkmc.l2menustacker.screen.base;
 
-import dev.xkmc.l2core.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2core.capability.player.PlayerCapabilityTemplate;
-import dev.xkmc.l2core.init.reg.simple.AttReg;
-import dev.xkmc.l2core.init.reg.simple.AttVal;
 import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.packets.AddTrackedToClient;
+import dev.xkmc.l2menustacker.screen.packets.CacheMouseToClient;
 import dev.xkmc.l2menustacker.screen.packets.PopLayerToClient;
 import dev.xkmc.l2menustacker.screen.track.MenuTraceRegistry;
 import dev.xkmc.l2menustacker.screen.track.NoData;
@@ -30,105 +28,106 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 
-    public static ScreenTracker get(Player player) {
-        return L2MSReg.TRACKER.type().getOrCreate(player);
-    }
+	public static ScreenTracker get(Player player) {
+		return L2MSReg.TRACKER.type().getOrCreate(player);
+	}
 
-    public static void onServerOpen(ServerPlayer player) {
-        get(player).serverOpen(player);
-    }
+	public static void onServerOpen(ServerPlayer player) {
+		get(player).serverOpen(player);
+	}
 
-    public static void onServerOpenMenu(ServerPlayer player, MenuProvider next, MenuTriggerType type, @Nullable Consumer<RegistryFriendlyByteBuf> buf) {
-        get(player).serverOpenMenu(player, MenuCache.of(player.level().registryAccess(), player.containerMenu, next, type, buf));
-    }
+	public static void onServerOpenMenu(ServerPlayer player, MenuProvider next, MenuTriggerType type, @Nullable Consumer<RegistryFriendlyByteBuf> buf) {
+		get(player).serverOpenMenu(player, MenuCache.of(player.level().registryAccess(), player.containerMenu, next, type, buf));
+	}
 
-    public static void removeAll(ServerPlayer player) {
-        get(player).stack.clear();
-    }
+	public static void removeAll(ServerPlayer player) {
+		get(player).stack.clear();
+	}
 
-    public static int size(ServerPlayer player) {
-        return get(player).stack.size();
-    }
+	public static int size(ServerPlayer player) {
+		return get(player).stack.size();
+	}
 
-    // non-static
+	// non-static
 
-    final Stack<TrackedEntry<?>> stack = new Stack<>();
+	final Stack<TrackedEntry<?>> stack = new Stack<>();
 
-    int wid;
+	int wid;
 
-    // --- server only values
-    private TrackedEntry<?> temp;
-    private boolean restoring = false;
-    private MenuCache current;
+	// --- server only values
+	private TrackedEntry<?> temp;
+	private boolean restoring = false;
+	private MenuCache current;
 
-    private void serverOpenMenu(ServerPlayer player, MenuCache next) {
-        if (temp != null) {
-            if (current != null)
-                temp.setTitle(current.title(), player.level().registryAccess());
-            serverOpenMenu(player, temp, next.menu());
-        }
-        this.current = next;
-        temp = null;
-    }
+	private void serverOpenMenu(ServerPlayer player, MenuCache next) {
+		if (temp != null) {
+			if (current != null)
+				temp.setTitle(current.title(), player.level().registryAccess());
+			serverOpenMenu(player, temp, next.menu());
+		}
+		this.current = next;
+		temp = null;
+	}
 
-    @Nullable
-    private TrackedEntry<?> getEntry(AbstractContainerMenu prev) {
-        if (prev.containerId == 0) {
-            return TrackedEntry.of(L2MSReg.TE_INVENTORY.get(), NoData.DATA);
-        }
-        var getter = MenuTraceRegistry.get(prev.getType());
-        if (getter != null) {
-            var entry = Wrappers.get(() -> getter.track(Wrappers.cast(prev)));
-            if (entry != null && entry.isPresent()) {
-                return entry.get();
+	@Nullable
+	private TrackedEntry<?> getEntry(AbstractContainerMenu prev) {
+		if (prev.containerId == 0) {
+			return TrackedEntry.of(L2MSReg.TE_INVENTORY.get(), NoData.DATA);
+		}
+		var getter = MenuTraceRegistry.get(prev.getType());
+		if (getter != null) {
+			var entry = Wrappers.get(() -> getter.track(Wrappers.cast(prev)));
+			if (entry != null && entry.isPresent()) {
+				return entry.get();
 
-            }
-        }
-        if (current != null && current.menu() == prev) {
-            return current.constructEntry();
-        }
-        return null;
-    }
+			}
+		}
+		if (current != null && current.menu() == prev) {
+			return current.constructEntry();
+		}
+		return null;
+	}
 
-    private void serverOpen(ServerPlayer player) {
-        if (restoring) return;
-        temp = getEntry(player.containerMenu);
-    }
+	private void serverOpen(ServerPlayer player) {
+		if (restoring) return;
+		temp = getEntry(player.containerMenu);
+	}
 
-    private void serverOpenMenu(ServerPlayer player, TrackedEntry<?> prev, AbstractContainerMenu menu) {
-        int toRemove = 0;
-        if (!stack.isEmpty()) {
-            TrackedEntry<?> next = getEntry(menu);
-            if (next != null) {
-                TrackedEntry<?> itr = stack.peek();
-                if (itr.shouldReturn(next)) {
-                    toRemove = 1;
-                    stack.pop();
-                }
-            }
-        }
-        stack.push(prev);
-        wid = menu.containerId;
-        L2MenuStacker.PACKET_HANDLER.toClientPlayer(new AddTrackedToClient(prev, toRemove, wid), player);
-    }
+	private void serverOpenMenu(ServerPlayer player, TrackedEntry<?> prev, AbstractContainerMenu menu) {
+		int toRemove = 0;
+		if (!stack.isEmpty()) {
+			TrackedEntry<?> next = getEntry(menu);
+			if (next != null) {
+				TrackedEntry<?> itr = stack.peek();
+				if (itr.shouldReturn(next)) {
+					toRemove = 1;
+					stack.pop();
+				}
+			}
+		}
+		stack.push(prev);
+		wid = menu.containerId;
+		L2MenuStacker.PACKET_HANDLER.toClientPlayer(new AddTrackedToClient(prev, toRemove, wid), player);
+	}
 
-    public boolean serverRestore(ServerPlayer player, int wid) {
-        if (stack.isEmpty()) return false;
-        if (this.wid == wid) {
-            restoring = true;
-            LayerPopType type = Wrappers.get(() -> stack.pop().restoreServerMenu(player));
-            restoring = false;
-            if (type != null && type != LayerPopType.FAIL) {
-                int id = player.containerMenu.containerId;
-                this.wid = id;
-                L2MenuStacker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean serverRestore(ServerPlayer player, int wid) {
+		if (stack.isEmpty()) return false;
+		if (this.wid == wid) {
+			restoring = true;
+			L2MenuStacker.PACKET_HANDLER.toClientPlayer(new CacheMouseToClient(), player);
+			LayerPopType type = Wrappers.get(() -> stack.pop().restoreServerMenu(player));
+			restoring = false;
+			if (type != null && type != LayerPopType.FAIL) {
+				int id = player.containerMenu.containerId;
+				this.wid = id;
+				L2MenuStacker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);
+				return true;
+			}
+		}
+		return false;
+	}
 
-    // --- client only values
-    boolean isWaiting;
+	// --- client only values
+	boolean isWaiting;
 
 }

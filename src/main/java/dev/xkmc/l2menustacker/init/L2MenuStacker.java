@@ -8,10 +8,7 @@ import dev.xkmc.l2menustacker.click.quickaccess.DefaultQuickAccessActions;
 import dev.xkmc.l2menustacker.click.quickaccess.QuickAccessClickHandler;
 import dev.xkmc.l2menustacker.compat.L2CuriosCompat;
 import dev.xkmc.l2menustacker.screen.base.L2MSReg;
-import dev.xkmc.l2menustacker.screen.packets.AddTrackedToClient;
-import dev.xkmc.l2menustacker.screen.packets.PopLayerToClient;
-import dev.xkmc.l2menustacker.screen.packets.RestoreMenuToServer;
-import dev.xkmc.l2menustacker.screen.packets.SetScreenToClient;
+import dev.xkmc.l2menustacker.screen.packets.*;
 import dev.xkmc.l2serial.network.PacketHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -39,7 +36,8 @@ public class L2MenuStacker {
         e -> e.create(RestoreMenuToServer.class, PLAY_TO_SERVER),
         e -> e.create(AddTrackedToClient.class, PLAY_TO_CLIENT),
         e -> e.create(SetScreenToClient.class, PLAY_TO_CLIENT),
-        e -> e.create(PopLayerToClient.class, PLAY_TO_CLIENT)
+        e -> e.create(PopLayerToClient.class, PLAY_TO_CLIENT),
+        e -> e.create(CacheMouseToClient.class, PLAY_TO_CLIENT)
     );
 
     public L2MenuStacker(IEventBus bus) {
