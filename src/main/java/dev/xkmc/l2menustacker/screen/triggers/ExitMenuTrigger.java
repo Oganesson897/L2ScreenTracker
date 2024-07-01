@@ -2,6 +2,7 @@ package dev.xkmc.l2menustacker.screen.triggers;
 
 import dev.xkmc.l2core.serial.advancements.BaseCriterion;
 import dev.xkmc.l2core.serial.advancements.BaseCriterionInstance;
+import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenuTrigger> {
 
     public static Ins exitOne() {
-        return new Ins();
+        return new Ins(L2MSReg.EXIT_MENU.get());
     }
 
     public static Ins exitAll() {
@@ -32,6 +33,10 @@ public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenu
 
         @SerialField
         private boolean all = false;
+
+        protected Ins(ExitMenuTrigger exitMenuTrigger) {
+            super(exitMenuTrigger);
+        }
 
     }
 
