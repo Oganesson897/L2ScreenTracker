@@ -1,0 +1,5 @@
+// 1.21	2024-07-22T16:41:09.585044	Registrate Provider for l2menustacker [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (mob_effect), Tags (attribute), Tags (enchantment)]
+f5adf9a61fc868d7f6867255999c0b86f78d12e0 assets/l2menustacker/lang/en_ud.json
+54fe15ffc0b65162af770b340148cdffb8c75d35 assets/l2menustacker/lang/en_us.json
+87a79151f4a2a699f8de20ed950a1c9c2da95bed data/l2menustacker/tags/item/quick_access.json
+042d6b3c62ca82ee52acdf3609d2ea34a98fe76d data/l2menustacker/tags/item/quick_access_vanilla.json
