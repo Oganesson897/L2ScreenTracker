@@ -5,15 +5,10 @@ import dev.xkmc.l2menustacker.init.L2MenuStacker;
 import dev.xkmc.l2menustacker.screen.packets.RestoreMenuToServer;
 import dev.xkmc.l2menustacker.screen.packets.ScreenType;
 import dev.xkmc.l2menustacker.screen.track.TrackedEntry;
-import dev.xkmc.l2tabs.tabs.core.TabBase;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 
 public class ScreenTrackerClient {
-
-	public static void cacheMouse() {
-		TabBase.cacheMousePos();
-	}
 
 	private static ScreenTracker getClient() {
 		LocalPlayer player = Proxy.getClientPlayer();

@@ -7,10 +7,11 @@
 	"ServerPlayerMixin"
   ],
   "client": [
-    "AbstractContainerScreenMixin"
+	"AbstractContainerScreenMixin",
+	"MinecraftMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+	"defaultRequire": 1
   },
   "minVersion": "0.8"
 }

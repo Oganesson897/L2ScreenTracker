@@ -6,7 +6,6 @@ import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2menustacker.click.SlotClickToServer;
 import dev.xkmc.l2menustacker.click.quickaccess.DefaultQuickAccessActions;
 import dev.xkmc.l2menustacker.click.quickaccess.QuickAccessClickHandler;
-import dev.xkmc.l2menustacker.compat.L2CuriosCompat;
 import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2menustacker.screen.packets.*;
 import dev.xkmc.l2serial.network.PacketHandler;
@@ -43,7 +42,6 @@ public class L2MenuStacker {
     public L2MenuStacker(IEventBus bus) {
         L2MSConfig.init();
         L2MSReg.register();
-        L2CuriosCompat.onStartup();
         QuickAccessClickHandler.INS = new QuickAccessClickHandler(loc("quick_access"));
         REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, L2MSTagGen::genItemTags);
         REGISTRATE.addDataGenerator(ProviderType.LANG, L2MSLangData::genLang);
@@ -54,7 +52,6 @@ public class L2MenuStacker {
         event.enqueueWork(() -> {
             DefaultQuickAccessActions.register();
             L2MSReg.commonSetup();
-            L2CuriosCompat.commonSetup();
         });
     }
 
