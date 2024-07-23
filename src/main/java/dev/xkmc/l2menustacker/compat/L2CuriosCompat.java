@@ -1,6 +1,6 @@
 package dev.xkmc.l2menustacker.compat;
 
-import dev.xkmc.l2tabs.compat.TabCuriosCompat;
+import dev.xkmc.l2tabs.compat.api.TabCuriosCompat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
