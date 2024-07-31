@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenuTrigger> {
 
     public static Ins exitOne() {
-        return new Ins(L2MSReg.EXIT_MENU.get());
+        return new Ins();
     }
 
     public static Ins exitAll() {
@@ -34,8 +34,8 @@ public class ExitMenuTrigger extends BaseCriterion<ExitMenuTrigger.Ins, ExitMenu
         @SerialField
         private boolean all = false;
 
-        protected Ins(ExitMenuTrigger exitMenuTrigger) {
-            super(exitMenuTrigger);
+        public Ins() {
+            super(L2MSReg.EXIT_MENU.get());
         }
 
     }

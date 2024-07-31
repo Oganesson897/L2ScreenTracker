@@ -118,6 +118,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 			LayerPopType type = Wrappers.get(() -> stack.pop().restoreServerMenu(player));
 			restoring = false;
 			if (type != null && type != LayerPopType.FAIL) {
+				L2MSReg.EXIT_MENU.get().trigger(player, false);
 				int id = player.containerMenu.containerId;
 				this.wid = id;
 				L2MenuStacker.PACKET_HANDLER.toClientPlayer(new PopLayerToClient(type, id), player);

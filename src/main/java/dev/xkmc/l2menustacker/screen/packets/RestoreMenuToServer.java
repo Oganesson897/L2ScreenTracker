@@ -26,7 +26,6 @@ public record RestoreMenuToServer(int wid)
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid || !ScreenTracker.get(player).serverRestore(sp, wid)) {
 			L2MenuStacker.PACKET_HANDLER.toClientPlayer(new SetScreenToClient(ScreenType.NONE), sp);
-			L2MSReg.EXIT_MENU.get().trigger(sp, false);
 		}
 	}
 
